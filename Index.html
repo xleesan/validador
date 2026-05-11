@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Placa - GAD Baba</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #f0f2f5;
+            --accent-color: #c53030;
+            --text-color: #333;
+            --success-bg: #e6fffa;
+            --success-text: #234e52;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-top: 10px solid var(--primary-color);
+        }
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .content {
+            padding: 25px;
+        }
+        .field {
+            margin-bottom: 18px;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 10px;
+        }
+        .label {
+            font-size: 0.75rem;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .value {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        .status-box {
+            background: var(--success-bg);
+            color: var(--success-text);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #b2f5ea;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.7rem;
+            color: #a0aec0;
+            background: #f7fafc;
+            line-height: 1.5;
+        }
+        .caducidad {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="header">
+            <h1>GAD MUNICIPAL BABA</h1>
+            <p>Jefatura de Tránsito</p>
+        </div>
+        <div class="content">
+            <div class="field">
+                <div class="label">Número de Placa</div>
+                <div class="value" id="placa">---</div>
+            </div>
+            <div class="field">
+                <div class="label">Tipo de Servicio</div>
+                <div class="value" id="servicio">---</div>
+            </div>
+            <div class="field">
+                <div class="label">Fecha de Emisión</div>
+                <div class="value" id="emision">---</div>
+            </div>
+            <div class="field">
+                <div class="label">Válido hasta</div>
+                <div class="value caducidad" id="caducidad">---</div>
+            </div>
+
+            <div id="status" class="status-box">
+                ✅ DOCUMENTO VIGENTE
+            </div>
+        </div>
+        <div class="footer">
+            SISTEMA OFICIAL DE VALIDACIÓN DIGITAL<br>
+            GAD MUNICIPAL DEL CANTÓN BABA<br>
+            © 2026 - Control Técnico de Tránsito
+        </div>
+    </div>
+
+    <script>
+        // Función técnica para capturar los datos de la URL
+        function getParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || "NO DISPONIBLE";
+        }
+
+        // Inyectar datos al cargar
+        window.onload = function() {
+            document.getElementById('placa').innerText = decodeURIComponent(getParam('p')).toUpperCase();
+            document.getElementById('servicio').innerText = decodeURIComponent(getParam('s'));
+            document.getElementById('emision').innerText = decodeURIComponent(getParam('e'));
+            document.getElementById('caducidad').innerText = decodeURIComponent(getParam('c'));
+        };
+    </script>
+</body>
+</html>
